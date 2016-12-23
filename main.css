@@ -68,7 +68,7 @@ a {
 }
 
 .header.to-center .name span:first-child {
-    font-size: 2.5em;
+    font-size: 2.6em;
     font-weight: 700;
 }
 
@@ -101,7 +101,7 @@ div.name {
 }
 
 .name span:nth-child(2) {
-    font-size: 1.2em;
+    font-size: 1.38em;
     color: gray;
     margin-bottom: 10px;
 }
@@ -125,11 +125,12 @@ div.name i:before {
     position: relative;
     opacity: 0;
     transform: rotateY(90deg);
+    transition: all 0.5s ease-out;
 }
 
 .contacts li {
-    width: 50px;
-    height: 50px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     position: relative;
     margin-right: 5px;
@@ -150,15 +151,15 @@ div.name i:before {
 div.contacts i {
     color: rgba(232, 53, 86, 1);
     display: inline-block;
-    font-size: 2em;
-    line-height: 50px;
+    font-size: 1.7em;
+    line-height: 42px;
 }
 
 div.contacts i.icon-vkontakte {
     transform: translateX(-2px);
 }
 
-div.contacts a.anim {
+/*div.contacts a.anim {
     opacity: 1;
     transform: rotateY(0);
 }
@@ -182,7 +183,7 @@ div.contacts li:nth-child(4) a.anim {
 div.contacts li:nth-child(5) a.anim {
     transition: all 0.5s 2s;
 }
-
+*/
 div.tooltip {
     font-family: 'Arial';
     font-size: 0.7em;

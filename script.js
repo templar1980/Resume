@@ -25,7 +25,7 @@ var sites = [{
     customer: "OOO «Панорама»",
     theme: "Ювелирные изделия",
     frameworks: ["jQuery", "Modernizr", "Parallax", "CSS animation"],
-    info: "Страница продающая акционные ювелирные изделия, с возможность заказа звонка. Просмотр изделий в модальном окне, обратный таймер.",
+    info: "Страница, продающая акционные ювелирные изделия, с возможность заказа звонка. Просмотр изделий в модальном окне, обратный таймер.",
     url: "sites/zolbaz/index.html",
     imgUrl: ['img/zol-baz-1.png', 'img/zol-baz-2.png', 'img/zol-baz-3.png'],
     menu: "commercial",
@@ -33,7 +33,7 @@ var sites = [{
 }, {
     name: "BigStore",
     theme: "Одежда",
-    customer: "beClever",   
+    customer: "beClever",
     frameworks: ["Modernizr", "Bootstrap", "native JS", "jQuery"],
     info: "Страница интернет-магазина \"Big Store\", созданная при прохождении курсов \"Front-End Pro\"",
     url: "sites/bigStore/index.html",
@@ -43,7 +43,7 @@ var sites = [{
 }, {
     name: "Analog and Digital Clock",
     theme: "Обучение",
-    customer: "beClever",   
+    customer: "beClever",
     frameworks: ["native JS"],
     info: "Часы созданы на native JS",
     url: "sites/Clock/index.html",
@@ -53,7 +53,7 @@ var sites = [{
 }, {
     name: "Камень, ножницы, бумага",
     theme: "Обучение, игра",
-    customer: "beClever",   
+    customer: "beClever",
     frameworks: ["native JS"],
     info: "Игра в камень, ножницы, бумага - создана на native JS",
     url: "sites/myGame/index.html",
@@ -62,23 +62,14 @@ var sites = [{
     id: "game"
 }]
 
-$(document).ready(function() {
-    $('.foto').css({
-        transform: 'rotateY(0) rotateZ(0) translate(0,0)',
-        opacity: 1
-    });
-    $('.name').css({
-        transform: 'none',
-        opacity: 1
-    });
-    $('.right-border').css({
-        width: '300px',
-        height: '100px'
-    });
+$(window).on('unload', function(event){
+    if ($('.window').width() == 0) {
+         localStorage.removeItem("statePagePortfolio");
+    }
+0
+});
 
-    setTimeout(function() {
-        $('#ho-adv').hide();
-    }, 200);
+$(document).ready(function() {
 
     $(window).keydown(function(event) {
         var chek = !!$('.window').width();
@@ -86,13 +77,6 @@ $(document).ready(function() {
             $('.btn-win-close img').click();
         }
     });
-
-    $('.contacts a').addClass('anim');
-
-    setTimeout(function() {
-        $('div.foto').addClass('changed');
-    }, 600);
-
 
     $('.menu li.resume-page').click(function() {
         var self = this;
@@ -113,7 +97,6 @@ $(document).ready(function() {
                 });
             }, 400);
         }, 50);
-
     });
 
     $('.menu li.portfolio-page').click(function() {
@@ -130,9 +113,7 @@ $(document).ready(function() {
                 });
             });
         }, 50);
-
     });
-
 
     $('.menu li.contacts-page').click(function() {
         var self = this;
@@ -172,15 +153,60 @@ $(document).ready(function() {
         setTimeout(function() {
             $('.portfolio').fadeIn(300);
         }, 900);
+    });
 
-        // $('.port-image').css({
-        //     transform: 'none'
-        // });
+    $('.window a').click(function(){
+        localStorage["statePagePortfolio"]='true';
     });
 
     $('.menu li.home-page').click(function() {
+        localStorage.removeItem('statePagePortfolio');
         location.reload();
     });
+
+    if (localStorage['statePagePortfolio']) {
+        $('.menu li.portfolio-page').click();
+        $('div.foto').addClass('changed');
+        $('.foto').css({
+            transform: 'none',
+            transition: 'none',
+            opacity: 1
+        });
+        $('.header').css({transition:'none'});
+        $('.name').css({
+            transform: 'none',
+            transition: 'none',
+            opacity: 1
+        });
+        localStorage.removeItem('statePagePortfolio');
+    } else {
+        $('.foto').css({
+            transform: 'none',
+            opacity: 1
+        });
+        $('.name').css({
+            transform: 'none',
+            opacity: 1
+        });
+        $('.right-border').css({
+            width: '300px',
+            height: '100px'
+        });
+        $('.contacts a').addClass('anim');
+        setTimeout(function() {
+            $('div.foto').addClass('changed');
+        }, 600);
+
+        setTimeout(function(){
+            $('.contacts li a').each(function(index){
+                $(this).css({
+                    opacity:1,
+                    transform: 'none',
+                    transitionDelay: 0.2*(index+1) + 's'
+                });
+            });
+        },1000);
+    };
 });
 
 
@@ -296,4 +322,8 @@ function renderWindow(id) {
         transform: 'translateY(10px)',
         transition: 'none'
     });
+}
+
+function getStatePagePortfolio() {
+    return Boolean();
 }
