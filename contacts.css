@@ -14,10 +14,9 @@
   color: inherit;
 }
 
-.contacts-box span {
+.box-item i+span {
   display: inline-block;
   opacity: 0;
-  transform: translateX(10px);
 }
 
 .contacts-box a:hover {

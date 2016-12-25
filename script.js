@@ -1,4 +1,4 @@
-var logo = {
+var sites, logo = {
     html: "logo/html.png",
     css: "logo/css.png",
     js: "logo/js.png",
@@ -10,109 +10,54 @@ var logo = {
     svg: "logo/svg.png",
     cssanimation: "logo/cssanimation.png"
 }
-var sites = [{
-    name: "Интернет магазин",
-    customer: "частное лицо",
-    theme: "Ножы ручной работы",
-    frameworks: ["jQuery", "Modernizr", "SVG", "AJAX", "CSS animation", "SVG animation"],
-    info: "При создании проэкта не было использовано ни одного плагина, весь функционал сайта создан самостоятельно. Single Page Application.",
-    url: "sites/BF/index.html",
-    imgUrl: ['img/knife-1.png', 'img/knife-2.png', 'img/knife-3.png'],
-    menu: "commercial",
-    id: "BurtFoster"
-}, {
-    name: "Landing page",
-    customer: "OOO «Панорама»",
-    theme: "Ювелирные изделия",
-    frameworks: ["jQuery", "Modernizr", "Parallax", "CSS animation"],
-    info: "Страница, продающая акционные ювелирные изделия, с возможность заказа звонка. Просмотр изделий в модальном окне, обратный таймер.",
-    url: "sites/zolbaz/index.html",
-    imgUrl: ['img/zol-baz-1.png', 'img/zol-baz-2.png', 'img/zol-baz-3.png'],
-    menu: "commercial",
-    id: "ZolBaz"
-}, {
-    name: "BigStore",
-    theme: "Одежда",
-    customer: "beClever",
-    frameworks: ["Modernizr", "Bootstrap", "native JS", "jQuery"],
-    info: "Страница интернет-магазина \"Big Store\", созданная при прохождении курсов \"Front-End Pro\"",
-    url: "sites/bigStore/index.html",
-    imgUrl: ['img/bigStore-1.png', 'img/bigStore-2.png', 'img/bigStore-3.png'],
-    menu: "other",
-    id: "bigStore"
-}, {
-    name: "Analog and Digital Clock",
-    theme: "Обучение",
-    customer: "beClever",
-    frameworks: ["native JS"],
-    info: "Часы созданы на native JS",
-    url: "sites/Clock/index.html",
-    imgUrl: ['img/clock-1.png', 'img/clock-2.png', 'img/clock-3.png'],
-    menu: "other",
-    id: "clock"
-}, {
-    name: "Камень, ножницы, бумага",
-    theme: "Обучение, игра",
-    customer: "beClever",
-    frameworks: ["native JS"],
-    info: "Игра в камень, ножницы, бумага - создана на native JS",
-    url: "sites/myGame/index.html",
-    imgUrl: ['img/game-1.png', 'img/game-2.png', 'img/game-3.png'],
-    menu: "other",
-    id: "game"
-}]
 
-$(window).on('unload', function(event){
+$(window).on('unload', function(event) {
     if ($('.window').width() == 0) {
-         localStorage.removeItem("statePagePortfolio");
+        localStorage.removeItem("statePagePortfolio");
     }
-0
 });
 
-$(document).ready(function() {
+$(window).on('load', function() {
+    $('.main').show();
+    $('.menu li.portfolio-page').click(function() {
+        var self = this;
+        clearEffects(self);
+        loadListSites();
+    });
 
     $(window).keydown(function(event) {
         var chek = !!$('.window').width();
         if ((event.which == 27) && (chek)) {
-            $('.btn-win-close img').click();
+            $('svg#svg-btn-close').click();
         }
+    });
+
+    $('.current-lang').click(function(event){
+        $('.select-lang').css({top:'-15px', transition: 'top 0.6s ease-out'});
+    });
+
+    $('.main').click(function(event) {
+         $('.select-lang').css({top:'-70px', transition: 'top 0.6s ease-out'});
+    });
+
+    $('.lang-item').click(function(event) {
+        var lang = $(event.currentTarget).attr('lang-id');
+        changeLanguage(lang, event.currentTarget);
+        if ($('.content').is(":visible")) {
+            $('.content').html('');
+            loadResume(lang);
+        };
+        if ($('.portfolio').is(":visible")) {
+            createPortfolioItem(lang);
+            $('.port-image').css({ transform: 'none', opacity: 1 });
+        };
     });
 
     $('.menu li.resume-page').click(function() {
         var self = this;
         clearEffects(self);
-        $('.content').show();
-        setTimeout(function() {
-            $('.skills-icon').addClass('anim-icon');
-            $('.skills-icon').each(function(index) {
-                $(this).css({
-                    transition: 'all 0.6s ' + (index + 1) * 0.2 + 's ease-out'
-                });
-
-            });
-            setTimeout(function() {
-                $('.skills-scale .scale').each(function(index) {
-                    var width = $(this).attr('data-per');
-                    $(this).find('div').css({ width: width + '%' });
-                });
-            }, 400);
-        }, 50);
-    });
-
-    $('.menu li.portfolio-page').click(function() {
-        var self = this;
-        clearEffects(self);
-        createPortfolioItem();
-        $('.portfolio').show();
-        setTimeout(function() {
-            $('.port-image').each(function(index) {
-                $(this).css({
-                    transform: 'rotateY(0)',
-                    opacity: 1,
-                    transition: 'all 0.6s ease-out ' + (index + 1) * 0.2 + 's'
-                });
-            });
-        }, 50);
+        var lang = $('.active-lang').attr('lang-id');
+        loadResume(lang);
     });
 
     $('.menu li.contacts-page').click(function() {
@@ -125,18 +70,21 @@ $(document).ready(function() {
                 $(this).css({
                     opacity: 1,
                     transform: 'translateY(0.2em) rotateY(0deg)',
-                    transition: 'all 0.5s ' + (0.2 * (index + 1)) + 's ease-out'
+                    transition: 'all 0.5s ' + (0.13 * (index + 1)) + 's ease-out'
                 });
                 $(this).next().css({
                     opacity: 1,
-                    transform: 'none',
-                    transition: 'all 0.5s ' + (0.21 * (index + 1)) + 's ease-out'
+                    transition: 'all 0.5s ' + (0.13 * (index + 1)) + 's ease-out'
                 });
             });
         }, 50);
     });
 
-    $('.btn-win-close img').click(function() {
+    $('svg#svg-btn-close').click(function() {
+
+        $('.window-des').css({
+            'overflow-y': 'initial'
+        });
 
         setTimeout(function() {
             $('.window').children().hide();
@@ -155,14 +103,20 @@ $(document).ready(function() {
         }, 900);
     });
 
-    $('.window a').click(function(){
-        localStorage["statePagePortfolio"]='true';
+    $('.window a').click(function() {
+        localStorage["statePagePortfolio"] = 'true';
     });
 
     $('.menu li.home-page').click(function() {
         localStorage.removeItem('statePagePortfolio');
         location.reload();
     });
+
+    if (localStorage['lang']) {
+        changeLanguage(localStorage['lang'], $('.lang-' + localStorage['lang']));
+    } else {
+        changeLanguage('ru', $('.lang-ru'));
+    };
 
     if (localStorage['statePagePortfolio']) {
         $('.menu li.portfolio-page').click();
@@ -172,7 +126,7 @@ $(document).ready(function() {
             transition: 'none',
             opacity: 1
         });
-        $('.header').css({transition:'none'});
+        $('.header').css({ transition: 'none' });
         $('.name').css({
             transform: 'none',
             transition: 'none',
@@ -180,35 +134,100 @@ $(document).ready(function() {
         });
         localStorage.removeItem('statePagePortfolio');
     } else {
-        $('.foto').css({
-            transform: 'none',
-            opacity: 1
-        });
-        $('.name').css({
-            transform: 'none',
-            opacity: 1
-        });
-        $('.right-border').css({
-            width: '300px',
-            height: '100px'
-        });
+
         $('.contacts a').addClass('anim');
+        setTimeout(function() {
+            $('.foto').css({
+                transform: 'none',
+                opacity: 1
+            });
+            $('.name').css({
+                transform: 'none',
+                opacity: 1
+            });
+            $('.right-border').css({
+                width: '300px',
+                height: '100px'
+            });
+        }, 30);
         setTimeout(function() {
             $('div.foto').addClass('changed');
         }, 600);
 
-        setTimeout(function(){
-            $('.contacts li a').each(function(index){
+        setTimeout(function() {
+            $('.contacts li a').each(function(index) {
                 $(this).css({
-                    opacity:1,
+                    opacity: 1,
                     transform: 'none',
-                    transitionDelay: 0.2*(index+1) + 's'
+                    transitionDelay: 0.17 * (index + 1) + 's'
                 });
             });
-        },1000);
+        }, 1000);
     };
 });
 
+function loadResume(lang) {
+    $.ajax({
+        type: "GET",
+        cache: true,
+        url: "lang/" + lang + '.html',
+        success: function(obj) {
+            $('.content').html(obj).show();
+            setTimeout(function() {
+                $('.skills-icon').addClass('anim-icon');
+                $('.skills-icon').each(function(index) {
+                    $(this).css({
+                        transition: 'all 0.6s ' + (index + 1) * 0.2 + 's ease-out'
+                    });
+                });
+                setTimeout(function() {
+                    $('.skills-scale .scale').each(function(index) {
+                        var width = $(this).attr('data-per');
+                        $(this).find('div').css({ width: width + '%' });
+                    });
+                }, 400);
+            }, 50);
+        }
+    });
+};
+
+function loadListSites() {
+    $.ajax({
+        type: "GET",
+        cache: true,
+        url: 'data/sites.json',
+        success: function(obj) {
+            sites = obj;
+            var lang = $('.active-lang').attr('lang-id');
+            createPortfolioItem(lang);
+            $('.portfolio').show();
+            setTimeout(function() {
+                $('.port-image').each(function(index) {
+                    $(this).css({
+                        transform: 'rotateY(0)',
+                        opacity: 1,
+                        transition: 'all 0.6s ease-out ' + (index + 1) * 0.15 + 's'
+                    });
+                });
+            }, 50);
+        }
+    });
+};
+
+
+function changeLanguage(language, currentTarget) {
+    $('.current-lang').css({
+        'background-image':'url(img/lang'+language+'.svg)'
+    });
+    var lang = language == 'ua'?'uk':language;
+    $('html').attr('lang', lang);
+    $('.select-lang div').removeClass('active-lang');
+    $(currentTarget).addClass('active-lang');
+    $('.lang').hide();
+    $('.' + language).show();
+    localStorage['lang'] = language;
+    
+}
 
 function clearEffects(self) {
     $('.animate-web').hide();
@@ -221,12 +240,12 @@ function clearEffects(self) {
     $('.contacts-box').hide();
     $('.portfolio').hide();
     $('.contacts-box i').css({ opacity: 0, transform: 'translateY(0.2em) rotateY(-90deg)' });
-    $('.contacts-box span').css({ opacity: 0, transform: 'translateX(-10px)' });
+    $('.box-item i+span').css({ opacity: 0 });
     $('.skills-icon').removeClass('anim-icon');
     $('.skills-scale .scale div').css({ width: 0 });
 }
 
-function createPortfolioItem() {
+function createPortfolioItem(lang) {
     $('.port-image-container').html('');
     $(sites).each(function(index) {
         var $item = $('<div>').addClass('port-image').attr('data-id', sites[index].id);
@@ -243,7 +262,7 @@ function createPortfolioItem() {
         $('<img>').attr('src', logo.css).appendTo($ul).wrap($('<li>'));
         $('<img>').attr('src', logo.js).appendTo($ul).wrap($('<li>'));
 
-        var arr = sites[index].frameworks;
+        var arr = sites[index].frameworks[1];
         $(arr).each(function(index) {
             var name = arr[index].toLowerCase().replace(" ", "");
             if (logo[name]) {
@@ -251,9 +270,13 @@ function createPortfolioItem() {
             }
         });
 
-        $('<div>').addClass('port-des-info-name').text(sites[index].name).appendTo($desInfo);
-        $('<div>').addClass('port-des-info-theme').html('Тематика: <span>' + sites[index].theme + '<span>').appendTo($desInfo);
-        $('<div>').addClass('port-des-info-customer').html('Заказчик: <span>' + sites[index].customer + '<span>').appendTo($desInfo);
+        $('<div>').addClass('port-des-info-name').text(sites[index].name[lang]).appendTo($desInfo);
+        var str = sites[index].theme[lang];
+        var html = '<strong>' + str.substring(0, str.indexOf(':') + 1) + '</strong>' + str.substring(str.indexOf(':') + 1);
+        $('<div>').addClass('port-des-info-theme').html(html).appendTo($desInfo);
+        str = sites[index].customer[lang];
+        html = '<strong>' + str.substring(0, str.indexOf(':') + 1) + '</strong>' + str.substring(str.indexOf(':') + 1);
+        $('<div>').addClass('port-des-info-customer').html(html).appendTo($desInfo);
 
         if (sites[index].menu === "commercial") {
             $('.commercial').append($item);
@@ -266,7 +289,8 @@ function createPortfolioItem() {
     $('.port-image').on('click', function(event) {
         $('.window').children().show();
         var id = $(event.currentTarget).attr('data-id');
-        renderWindow(id);
+        var lang = $('.active-lang').attr('lang-id');
+        renderWindow(id, lang);
 
         $('.window').css({
             width: '100%'
@@ -278,9 +302,15 @@ function createPortfolioItem() {
             });
 
         }, 650);
+
+        setTimeout(function() {
+            $('.window-des').css({
+                'overflow-y': 'auto'
+            });
+        }, 3000);
+
         setTimeout(function() {
             $('.portfolio').fadeOut(300);
-
         }, 200);
 
         setTimeout(function() {
@@ -295,7 +325,7 @@ function createPortfolioItem() {
     });
 }
 
-function renderWindow(id) {
+function renderWindow(id, lang) {
     var obj;
     $(sites).each(function(index) {
         if (sites[index].id == id) {
@@ -306,15 +336,29 @@ function renderWindow(id) {
     $('.des-img').attr('href', obj.url).css({
         'background-image': 'url(' + obj.imgUrl[1] + ')'
     });
-    $('.des-name').text(obj.name);
-    $('.customer span').text(obj.customer);
-    var html = '<strong>Использовано:</strong><br>';
-    $(obj.frameworks).each(function(index) {
-        html += obj.frameworks[index] + '<br>'
+    $('.des-name').text(obj.name[lang]);
+
+    var str = obj.customer[lang];
+    var strBegin = str.substring(0, str.indexOf(':') + 1);
+    var strEnd = str.substring(str.indexOf(':') + 1).replace(' ', '');
+    strEnd = strEnd[0].toUpperCase() + strEnd.substring(1);
+    var html = '<strong>' + strBegin + '</strong> <br>' + strEnd;
+    $('.customer').html(html);
+
+    str = obj.theme[lang];
+    strBegin = str.substring(0, str.indexOf(':') + 1);
+    strEnd = str.substring(str.indexOf(':') + 1).replace(' ', '');
+    strEnd = strEnd[0].toUpperCase() + strEnd.substring(1);
+    html = '<strong>' + strBegin + '</strong> <br>' + strEnd;
+    $('.theme').html(html);
+
+    html = '<strong>' + obj.frameworks[0][lang] + '</strong><br>';
+    $(obj.frameworks[1]).each(function(index) {
+        html += obj.frameworks[1][index] + '<br>'
     });
     $('.frameworks').html(html);
-    $('.theme').html('<strong>Тематика: </strong> <br>' + obj.theme);
-    $('.info').text(obj.info);
+
+    $('.info').text(obj.info[lang]);
     $('.btn-toGo').attr('href', obj.url);
 
     $('.port-anim').css({
@@ -322,8 +366,4 @@ function renderWindow(id) {
         transform: 'translateY(10px)',
         transition: 'none'
     });
-}
-
-function getStatePagePortfolio() {
-    return Boolean();
 }
