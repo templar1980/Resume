@@ -6,6 +6,7 @@
     bottom: 30px;
     right: 30px;
     opacity: 0.8;
+    z-index: -1;
 }
 
 @keyframes animateWord {
