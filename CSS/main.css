@@ -4,12 +4,12 @@
 
 @font-face {
   font-family: 'Play';
-  src: url(Fonts/Play/Play-Regular.ttf);
+  src: url(../Fonts/Play/Play-Regular.ttf);
 }
 
 @font-face {
   font-family: 'Ubuntu';
-  src: url(Fonts/Ubuntu/Ubuntu-Regular.ttf);
+  src: url(../Fonts/Ubuntu/Ubuntu-Regular.ttf);
 }
 
 body {
@@ -492,15 +492,15 @@ div.foto.changed:before {
 }
 
 .lang-ru:before {
-  background: url(img/langru.svg) 50% 50% no-repeat;
+  background: url(../img/langru.svg) 50% 50% no-repeat;
 }
 
 .lang-en:before {
-  background: url(img/langen.svg) 50% 50% no-repeat;
+  background: url(../img/langen.svg) 50% 50% no-repeat;
 }
 
 .lang-ua:before {
-  background: url(img/langua.svg) 50% 50% no-repeat;
+  background: url(../img/langua.svg) 50% 50% no-repeat;
 }
 
 span.lang {
@@ -552,7 +552,7 @@ span.lang {
   position: fixed;
   left: 0;
   top: 0;
-  background: url(overlay-bg.png) 0% 0% repeat;
+  background: url(../img/overlay-bg.png) 0% 0% repeat;
   background-size: 3px 3px;
   z-index: -1;
   opacity: 0.09;

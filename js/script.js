@@ -1,14 +1,14 @@
 var sites, logo = {
-    html: "logo/html.png",
-    css: "logo/css.png",
-    js: "logo/js.png",
-    ajax: "logo/ajax.png",
-    bootstrap: "logo/bootstrap.png",
-    parallax: "logo/parallax.png",
-    jquery: "logo/jquery.png",
-    modernizr: "logo/modernizr.png",
-    svg: "logo/svg.png",
-    cssanimation: "logo/cssanimation.png"
+    html: "img/logo/html.png",
+    css: "img/logo/css.png",
+    js: "img/logo/js.png",
+    ajax: "img/logo/ajax.png",
+    bootstrap: "img/logo/bootstrap.png",
+    parallax: "img/logo/parallax.png",
+    jquery: "img/logo/jquery.png",
+    modernizr: "img/logo/modernizr.png",
+    svg: "img/logo/svg.png",
+    cssanimation: "img/logo/cssanimation.png"
 }
 
 $(window).on('unload', function(event) {
