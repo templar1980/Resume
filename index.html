@@ -19,9 +19,33 @@
 <body>
    <div class="select-lang">
       <div class="current-lang"></div>
-      <div class="lang-ru lang-item active-lang" lang-id="ru"></div>     
-      <div class="lang-en lang-item" lang-id="en"></div>
-      <div class="lang-ua lang-item" lang-id="ua"></div>
+      <div class="lang-ru lang-item active-lang" lang-id="ru"><span>РУС</span></div>
+      <div class="lang-en lang-item" lang-id="en"><span>ENG</span></div>
+      <div class="lang-ua lang-item" lang-id="ua"><span>УКР</span></div>
+   </div>
+   <div class="menu">
+      <ul>
+         <li class="active home-page">
+            <span class="ru lang">ГЛАВНАЯ</span>
+            <span class="en lang">HOME</span>
+            <span class="ua lang">ГОЛОВНА</span>
+         </li>
+         <li class="resume-page">
+            <span class="ru lang">РЕЗЮМЕ</span>
+            <span class="en lang">RESUME</span>
+            <span class="ua lang">РЕЗЮМЕ</span>
+         </li>
+         <li class="portfolio-page">
+            <span class="ru lang">ПОРТФОЛИО</span>
+            <span class="en lang">PORTFOLIO</span>
+            <span class="ua lang">ПОРТФОЛІО</span>
+         </li>
+         <li class="contacts-page">
+            <span class="ru lang">КОНТАКТЫ</span>
+            <span class="en lang">CONTACTS</span>
+            <span class="ua lang">КОНТАКТИ</span>
+         </li>
+      </ul>
    </div>
    <div class="main">
       <div class="overlay"></div>
@@ -109,237 +133,7 @@
             </div>
          </div>
       </div>
-      <div class="menu">
-         <ul>
-            <li class="active home-page">
-               <span class="ru lang">ГЛАВНАЯ</span>
-               <span class="en lang">HOME</span>
-               <span class="ua lang">ГОЛОВНА</span>
-            </li>
-            <li class="resume-page">
-               <span class="ru lang">РЕЗЮМЕ</span>
-               <span class="en lang">RESUME</span>
-               <span class="ua lang">РЕЗЮМЕ</span>
-            </li>
-            <li class="portfolio-page">
-               <span class="ru lang">ПОРТФОЛИО</span>
-               <span class="en lang">PORTFOLIO</span>
-               <span class="ua lang">ПОРТФОЛІО</span>
-            </li>
-            <li class="contacts-page">
-               <span class="ru lang">КОНТАКТЫ</span>
-               <span class="en lang">CONTACTS</span>
-               <span class="ua lang">КОНТАКТИ</span>
-            </li>
-         </ul>
-      </div>
       <div class="content">
-         <!-- <div class="resume">
-            <div class="exp">
-               <h1><span class="ru">РЕЗЮМЕ</span><span class="en">Resume</span></h1>
-               <div class="exp-row">
-                  <div class="exp-col1">
-                     <div class="skills-icon">
-                        <img src="job.svg" alt="">
-                     </div>
-                  </div>
-                  <div class="exp-col2">
-                     <div class="work">
-                        <h1 class="ru">Опыт работы</h1>
-                        <h1 class="en">Experience</h1>
-                        <h2>Web-Developer(Front-End)</h2>
-                        <h3>FREELANCE</h3>
-                        <span> март 2015 — до сегодняшнего  дня </span>
-                        <p>Разработка интернет-магазинов, Landing Page. Внесение правок в существующие проэкты. Адаптация под мобильные устройства.
-                        </p>
-                     </div>
-                     <div class="work">
-                        <h2>Старший ревизор, Программист 1С</h2>
-                        <h3>АТБ, Корпорация (Торговля розничная / Retail)</h3>
-                        <span> август 2007 — март 2015</span>
-                        <p>
-                           Создание, доработка обработок и отчетов для нужд службы в среде разработки «1с» Предприятие 8.1. Пересчет товарно-материальных ценностей, проверка и анализ правильности ведения учета в программе 1с. Консультации, обучение и написание инструкций для пользователей.
-                        </p>
-                     </div>
-                     <div class="work">
-                        <h2>Графический дизайнер</h2>
-                        <h3>Рекламное агентство "Шторм" (Реклама и PR-услуги)</h3>
-                        <span>февраль 2005 — август 2007</span>
-                        <p>
-                           Разработка оригинал-макетов в СМИ, полиграфии, сувенирная продукция, предпечатная подготовка, разработка логотипов и фирменного стиля, разработка упаковки, разработка дизайна; Верстка каталогов, буклетов, листовок и т.д.
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <div class="exp-row">
-                  <div class="exp-col1">
-                     <div class="skills-icon">
-                        <img src="education.svg" alt="">
-                     </div>
-                  </div>
-                  <div class="exp-col2">
-                     <div class="work">
-                        <h1>Образование</h1>
-                        <h2>БАКАЛАВР</h2>
-                        <h3>компьютерная инженерия</h3>
-                        <h3><a href="http://www.fpm.kpi.ua/main.do;jsessionid=0FA938A9E2F7D9CE922032D7E4BF01AB" target="_blank" >Национальный технический университет Украины "КПИ"</a></h3>
-                        <span> факультет прикладной математики, компьютерные системы и сети</span>
-                        <br>
-                        <span>Год окончания: 2015</span>
-                     </div>
-                     <div class="work">
-                        <h2>ИНЖЕНЕР</h2>
-                        <h3>промышленная электроника</h3>
-                        <h3><a href="http://fel.kpi.ua/index.php?lang=ru" target="_blank" >Национальный технический университет Украины "КПИ"</a></h3>
-                        <span>факультет электроники, промышленная электроника</span>
-                        <br>
-                        <span>Год окончания: 2003</span>
-                     </div>
-                     <div class="work">
-                        <h2>КУРСЫ</h2>
-                        <h3>Front-End Pro</h3>
-                        <h3><a href="http://be-clever.com.ua" target="_blank" >Центр обучения "BeClever"</a></h3>
-                        <span>Год окончания: 2016</span>
-                        <br>
-                        <span>HTML, CSS, JavaScript, Bootstrap, JQuery</span>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="skills">
-               <div class="row">
-                  <div class="skills-icon">
-                     <img src="info.svg" alt="">
-                  </div>
-                  <h2><span class="ru">Общая информация</span><span class="en">General information</span></h2>
-                  <p>
-                     <span class="ru">Дата рождения: 30.03.1980</span><span class="en">Date of birth:  30.03.1980</span>
-                     <br> <span class="ru">Возраст: 36лет</span> <span class="en">Age: 36 years</span>
-                     <br> <span class="ru">Семейное положение: женат</span> <span class="en">Marital status: married</span>
-                     <br>
-                  </p>
-               </div>
-               <div class="row">
-                  <div class="skills-icon">
-                     <img src="skills.svg" alt="">
-                  </div>
-                  <h2><span class="ru">Профессиональные навыки</span><span class="en">Professional skills</span></h2>
-                  <div class="skills-scale">
-                     <div>HTML/HTML5</div>
-                     <div class="scale" data-per="75">
-                        <div></div>
-                     </div>
-                  </div>
-                  <div class="skills-scale">
-                     <div>CSS/CSS3</div>
-                     <div class="scale" data-per="85">
-                        <div></div>
-                     </div>
-                  </div>
-                  <div class="skills-scale">
-                     <div>LESS</div>
-                     <div class="scale" data-per="90">
-                        <div></div>
-                     </div>
-                  </div>
-                  <div class="skills-scale">
-                     <div>СSS animation</div>
-                     <div class="scale" data-per="85">
-                        <div></div>
-                     </div>
-                  </div>
-                  <div class="skills-scale">
-                     <div>SVG/SVG animation</div>
-                     <div class="scale" data-per="50">
-                        <div></div>
-                     </div>
-                  </div>
-                  <div class="skills-scale">
-                     <div>Bootstrap</div>
-                     <div class="scale" data-per="60">
-                        <div></div>
-                     </div>
-                  </div>
-                  <div class="skills-scale">
-                     <div>jQuery</div>
-                     <div class="scale" data-per="80">
-                        <div></div>
-                     </div>
-                  </div>
-                  <div class="skills-scale">
-                     <div>jQueryUI</div>
-                     <div class="scale" data-per="60">
-                        <div></div>
-                     </div>
-                  </div>
-                  <div class="skills-scale">
-                     <div>AngularJS</div>
-                     <div class="scale" data-per="40">
-                        <div></div>
-                     </div>
-                  </div>
-                  <div class="skills-scale">
-                     <div>Git</div>
-                     <div class="scale" data-per="60">
-                        <div></div>
-                     </div>
-                  </div>
-                  <div class="skills-scale">
-                     <div>Wordpress</div>
-                     <div class="scale" data-per="30">
-                        <div></div>
-                     </div>
-                  </div>
-                  <p>
-                     AJAX, Parallax - технологии. Адаптивная, респонсивная верстка. Иконочные шрифты. Разработка single page application. Отличные знания графических редакторов: Adobe Photoshop, Adobe Illustrator, CorelDraw.
-                  </p>
-               </div>
-               <div class="row">
-                  <div class="skills-icon">
-                     <img src="language.svg" alt="">
-                  </div>
-                  <h2>Владение языками</h2>
-                  <p>
-                     Русский, украинский.
-                     <br> Английский (базовый), на уровне чтения тех. документации. Ведется работа по повышению знаний в этой области.
-                  </p>
-               </div>
-               <div class="row">
-                  <div class="skills-icon">
-                     <img src="svg1.svg" alt="">
-                  </div>
-                  <h2>Личные качества</h2>
-                  <ul>
-                     <li>Быстрая обучаемость</li>
-                     <li>Самообучение</li>
-                     <li>Желание работать</li>
-                     <li>Исполнительность</li>
-                     <li>Креативность</li>
-                     <li>Творческий подход</li>
-                     <li>Умение работать в команде</li>
-                  </ul>
-               </div>
-               <div class="row">
-                  <div class="skills-icon">
-                     <img src="work.svg" alt="">
-                  </div>
-                  <h2>Цели</h2>
-                  <p>
-                     Найти инересную работу над новыми проэктами, параллельно, получить возможность развития, роста, обучения и приобретения опыта. Получить опыт применения навыков и умений, расширить базу знаний, развить свои профессиональные навыки.
-                     <br>
-                     <br>
-                     <strong>Вид работы:</strong> удаленная, стационарная.
-                  </p>
-               </div>
-               <div class="row">
-                  <div class="skills-icon">
-                     <img src="money.svg" alt="">
-                  </div>
-                  <h2>Уровень з/п</h2>
-                  <p>от $600 c дальнейшим ростом</p>
-               </div>
-            </div>
-         </div> -->
       </div>
       <div class="portfolio">
          <h1><span class="ru lang">Портфолио</span><span class="en lang">Portfolio</span><span class="ua lang">Портфоліо</span></h1>
@@ -403,9 +197,9 @@
             <span>
                 <a href="https://github.com/templar1980" target="_blank">
                   <span class="en lang">Find me on GitHub</span>
-                  <span class="ru lang">Ищите на GitHub</span>
-                  <span class="ua lang">Шукайте на GitHub</span>
-               </a>
+            <span class="ru lang">Ищите на GitHub</span>
+            <span class="ua lang">Шукайте на GitHub</span>
+            </a>
             </span>
          </div>
          <div class="linkedin box-item">

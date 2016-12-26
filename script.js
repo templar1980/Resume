@@ -32,17 +32,20 @@ $(window).on('load', function() {
         }
     });
 
-    $('.current-lang').click(function(event){
-        $('.select-lang').css({top:'-15px', transition: 'top 0.6s ease-out'});
+    $('.current-lang').click(function(event) {
+        $('.select-lang').removeClass('close-panel').addClass('open-panel');
     });
 
     $('.main').click(function(event) {
-         $('.select-lang').css({top:'-70px', transition: 'top 0.6s ease-out'});
+        if ($('.select-lang').attr('class').indexOf('open') > -1) {
+            $('.select-lang').removeClass('open-panel').addClass('close-panel');
+        };
     });
 
     $('.lang-item').click(function(event) {
         var lang = $(event.currentTarget).attr('lang-id');
         changeLanguage(lang, event.currentTarget);
+        $('.select-lang').removeClass('open-panel').addClass('close-panel');
         if ($('.content').is(":visible")) {
             $('.content').html('');
             loadResume(lang);
@@ -217,16 +220,16 @@ function loadListSites() {
 
 function changeLanguage(language, currentTarget) {
     $('.current-lang').css({
-        'background-image':'url(img/lang'+language+'.svg)'
+        'background-image': 'url(img/lang' + language + '.svg)'
     });
-    var lang = language == 'ua'?'uk':language;
+    var lang = language == 'ua' ? 'uk' : language;
     $('html').attr('lang', lang);
     $('.select-lang div').removeClass('active-lang');
     $(currentTarget).addClass('active-lang');
     $('.lang').hide();
     $('.' + language).show();
     localStorage['lang'] = language;
-    
+
 }
 
 function clearEffects(self) {
